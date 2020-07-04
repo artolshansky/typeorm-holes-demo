@@ -8,12 +8,12 @@
     "noImplicitAny": false,
     "noLib": false,
     "target": "es2017",
-    "outDir": "dist/migration",
+    "outDir": "./dist/migration",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strict": true
   },
   "include": [
-    "migration/*.ts"
+    "./migration/*.ts"
   ]
 }

@@ -5,7 +5,7 @@ module.exports = {
   username: process.env.DB_USER || 'root',
   password: process.env.DB_PWD || '',
   database: process.env.DB_NAME || 'demo',
-  entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+  entities: ['dist/**/*.entity.js'],
   migrationsTableName: 'migration_table',
   migrations: ['dist/migration/*.js'],
   migrationsRun: false,
