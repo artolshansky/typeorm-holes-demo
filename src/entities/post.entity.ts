@@ -37,6 +37,7 @@ export class PostEntity {
   @BeforeInsert()
   onCreate(): void {
     this.createdAt = Date.now();
+    this.updatedAt = Date.now();
   }
 
   @BeforeUpdate()

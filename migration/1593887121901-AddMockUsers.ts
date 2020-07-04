@@ -1,0 +1,416 @@
+import { Between, LessThan, MigrationInterface, QueryRunner } from 'typeorm';
+
+const users = [{
+  'username': 'breckhouse0',
+  'email': 'gtopley0@imageshack.us',
+  'createdAt': 1588587529544,
+}, {
+  'username': 'krozycki1',
+  'email': 'mennion1@senate.gov',
+  'createdAt': 1580959358015,
+}, {
+  'username': 'ahullbrook2',
+  'email': 'ldrynan2@wordpress.com',
+  'createdAt': 1580505743418,
+}, {
+  'username': 'bellaman3',
+  'email': 'lokenfold3@admin.ch',
+  'createdAt': 1585419445967,
+}, {
+  'username': 'hcathery4',
+  'email': 'pkimm4@blogtalkradio.com',
+  'createdAt': 1592286264855,
+}, {
+  'username': 'wmcchruiter5',
+  'email': 'sevennett5@sciencedaily.com',
+  'createdAt': 1580933651580,
+}, {
+  'username': 'rphipson6',
+  'email': 'dlugsdin6@acquirethisname.com',
+  'createdAt': 1593580192923,
+}, {
+  'username': 'jainger7',
+  'email': 'wgibling7@mit.edu',
+  'createdAt': 1585815038225,
+}, {
+  'username': 'cbragger8',
+  'email': 'afeld8@fda.gov',
+  'createdAt': 1593191478613,
+}, {
+  'username': 'ctremoille9',
+  'email': 'rjepp9@geocities.jp',
+  'createdAt': 1592626361282,
+}, {
+  'username': 'rnenda',
+  'email': 'mespinhoa@topsy.com',
+  'createdAt': 1581305153292,
+}, {
+  'username': 'oscandrickb',
+  'email': 'mmalkieb@g.co',
+  'createdAt': 1578826889452,
+}, {
+  'username': 'sbarnabyc',
+  'email': 'castridgec@vistaprint.com',
+  'createdAt': 1578498286055,
+}, {
+  'username': 'bsawkinsd',
+  'email': 'ifreemantled@angelfire.com',
+  'createdAt': 1583317637727,
+}, {
+  'username': 'galchine',
+  'email': 'mmanache@cnn.com',
+  'createdAt': 1593112630031,
+}, {
+  'username': 'cbessonf',
+  'email': 'tfriself@zdnet.com',
+  'createdAt': 1591664829792,
+}, {
+  'username': 'bnysg',
+  'email': 'cmackimg@tinyurl.com',
+  'createdAt': 1589446727561,
+}, {
+  'username': 'mberendsenh',
+  'email': 'dgalerh@blog.com',
+  'createdAt': 1580376291647,
+}, {
+  'username': 'cscarcei',
+  'email': 'wmasdeni@altervista.org',
+  'createdAt': 1583817904379,
+}, {
+  'username': 'ipridej',
+  'email': 'cdychej@google.com',
+  'createdAt': 1578701175427,
+}, {
+  'username': 'fvoulesk',
+  'email': 'scobellik@comsenz.com',
+  'createdAt': 1586670570467,
+}, {
+  'username': 'npendrel',
+  'email': 'bmacdermandl@nature.com',
+  'createdAt': 1583410319041,
+}, {
+  'username': 'ebeacomm',
+  'email': 'pdelgardom@amazon.co.jp',
+  'createdAt': 1580899465671,
+}, {
+  'username': 'cfronksn',
+  'email': 'viacobetton@nydailynews.com',
+  'createdAt': 1582870368136,
+}, {
+  'username': 'tdumphrieso',
+  'email': 'gpietzkeo@admin.ch',
+  'createdAt': 1584901114431,
+}, {
+  'username': 'othurstanp',
+  'email': 'mluskp@rambler.ru',
+  'createdAt': 1583885669534,
+}, {
+  'username': 'bswainsonq',
+  'email': 'ewonterq@pbs.org',
+  'createdAt': 1592855757895,
+}, {
+  'username': 'acristofolr',
+  'email': 'hturnerr@bandcamp.com',
+  'createdAt': 1588096458532,
+}, {
+  'username': 'aickovitss',
+  'email': 'dgrimmerts@abc.net.au',
+  'createdAt': 1586005421632,
+}, {
+  'username': 'lmanthroppet',
+  'email': 'dbelhommet@google.com',
+  'createdAt': 1586971097443,
+}, {
+  'username': 'aduru',
+  'email': 'mtanteu@people.com.cn',
+  'createdAt': 1587643637616,
+}, {
+  'username': 'tbarrandv',
+  'email': 'bgreiswoodv@feedburner.com',
+  'createdAt': 1578318223628,
+}, {
+  'username': 'lteresew',
+  'email': 'jcambridgew@joomla.org',
+  'createdAt': 1586543795728,
+}, {
+  'username': 'msilcocksx',
+  'email': 'rprettyjohnx@boston.com',
+  'createdAt': 1579751262097,
+}, {
+  'username': 'mburgoiney',
+  'email': 'cwhatsizey@google.fr',
+  'createdAt': 1593879295342,
+}, {
+  'username': 'llehrerz',
+  'email': 'ckochlinz@csmonitor.com',
+  'createdAt': 1585024587350,
+}, {
+  'username': 'awollard10',
+  'email': 'cphilipp10@answers.com',
+  'createdAt': 1581400210697,
+}, {
+  'username': 'rcamoletto11',
+  'email': 'mmacquarrie11@ustream.tv',
+  'createdAt': 1580427358877,
+}, {
+  'username': 'belles12',
+  'email': 'lolerenshaw12@infoseek.co.jp',
+  'createdAt': 1589861562349,
+}, {
+  'username': 'mcostock13',
+  'email': 'xhriinchenko13@washington.edu',
+  'createdAt': 1590755076628,
+}, {
+  'username': 'ltweedy14',
+  'email': 'hsmythe14@nymag.com',
+  'createdAt': 1585256356692,
+}, {
+  'username': 'ttizard15',
+  'email': 'rdot15@a8.net',
+  'createdAt': 1585765710129,
+}, {
+  'username': 'btwamley16',
+  'email': 'tismail16@tripadvisor.com',
+  'createdAt': 1585220835984,
+}, {
+  'username': 'crays17',
+  'email': 'asaill17@cbc.ca',
+  'createdAt': 1591716314650,
+}, {
+  'username': 'leveringham18',
+  'email': 'dcissen18@auda.org.au',
+  'createdAt': 1591780135290,
+}, {
+  'username': 'drigden19',
+  'email': 'vlow19@lycos.com',
+  'createdAt': 1587104907606,
+}, {
+  'username': 'mhullbrook1a',
+  'email': 'aiddison1a@reference.com',
+  'createdAt': 1578188186819,
+}, {
+  'username': 'tquincee1b',
+  'email': 'kjaggli1b@so-net.ne.jp',
+  'createdAt': 1584457866595,
+}, {
+  'username': 'lkonertz1c',
+  'email': 'nsummerlad1c@census.gov',
+  'createdAt': 1582472045895,
+}, {
+  'username': 'jsheldon1d',
+  'email': 'dguerrazzi1d@smh.com.au',
+  'createdAt': 1592001287067,
+}, {
+  'username': 'rriddington1e',
+  'email': 'afardy1e@cbslocal.com',
+  'createdAt': 1586652214664,
+}, {
+  'username': 'aatcherley1f',
+  'email': 'hvasyuchov1f@discuz.net',
+  'createdAt': 1584787494625,
+}, {
+  'username': 'eedling1g',
+  'email': 'nhurdle1g@senate.gov',
+  'createdAt': 1582865917651,
+}, {
+  'username': 'bcasebourne1h',
+  'email': 'grivett1h@google.ru',
+  'createdAt': 1586476573307,
+}, {
+  'username': 'bpreto1i',
+  'email': 'agwinnett1i@photobucket.com',
+  'createdAt': 1593162399586,
+}, {
+  'username': 'ebizzey1j',
+  'email': 'mtulloch1j@redcross.org',
+  'createdAt': 1580596739524,
+}, {
+  'username': 'rimlin1k',
+  'email': 'cdasent1k@typepad.com',
+  'createdAt': 1583875325241,
+}, {
+  'username': 'ghedingham1l',
+  'email': 'ltournay1l@shareasale.com',
+  'createdAt': 1582040096799,
+}, {
+  'username': 'aqueree1m',
+  'email': 'bbrocklesby1m@tamu.edu',
+  'createdAt': 1580233948731,
+}, {
+  'username': 'aellerey1n',
+  'email': 'gwloch1n@deviantart.com',
+  'createdAt': 1591259790476,
+}, {
+  'username': 'bellingsworth1o',
+  'email': 'mgrenville1o@gravatar.com',
+  'createdAt': 1581208353928,
+}, {
+  'username': 'eandreas1p',
+  'email': 'bdurtnall1p@tripadvisor.com',
+  'createdAt': 1585758744226,
+}, {
+  'username': 'pclinch1q',
+  'email': 'bfedder1q@go.com',
+  'createdAt': 1593208902719,
+}, {
+  'username': 'sdeville1r',
+  'email': 'nlinham1r@google.nl',
+  'createdAt': 1588402877462,
+}, {
+  'username': 'cgrunson1s',
+  'email': 'pdunlop1s@usatoday.com',
+  'createdAt': 1582214300792,
+}, {
+  'username': 'hdraycott1t',
+  'email': 'jmatzel1t@pcworld.com',
+  'createdAt': 1577896287794,
+}, {
+  'username': 'enuttey1u',
+  'email': 'awolseley1u@dell.com',
+  'createdAt': 1579175403446,
+}, {
+  'username': 'bbagster1v',
+  'email': 'gyannoni1v@yellowpages.com',
+  'createdAt': 1585478916434,
+}, {
+  'username': 'glavers1w',
+  'email': 'bwrintmore1w@is.gd',
+  'createdAt': 1586257280113,
+}, {
+  'username': 'ehambleton1x',
+  'email': 'ayurchishin1x@gmpg.org',
+  'createdAt': 1591622736418,
+}, {
+  'username': 'agwalter1y',
+  'email': 'lnash1y@vistaprint.com',
+  'createdAt': 1578097182617,
+}, {
+  'username': 'wmasey1z',
+  'email': 'fvel1z@redcross.org',
+  'createdAt': 1578231718670,
+}, {
+  'username': 'lmuddle20',
+  'email': 'ccabble20@ibm.com',
+  'createdAt': 1585108423278,
+}, {
+  'username': 'jouchterlony21',
+  'email': 'ltaberner21@soundcloud.com',
+  'createdAt': 1584087950082,
+}, {
+  'username': 'sbafford22',
+  'email': 'gbest22@jimdo.com',
+  'createdAt': 1580946464296,
+}, {
+  'username': 'gfitkin23',
+  'email': 'ffleckness23@msu.edu',
+  'createdAt': 1582740074124,
+}, {
+  'username': 'ewitherspoon24',
+  'email': 'skolodziej24@auda.org.au',
+  'createdAt': 1585497734401,
+}, {
+  'username': 'rbatstone25',
+  'email': 'tdonner25@behance.net',
+  'createdAt': 1589289257440,
+}, {
+  'username': 'felrick26',
+  'email': 'lgeist26@flickr.com',
+  'createdAt': 1586263992054,
+}, {
+  'username': 'pterbeek27',
+  'email': 'hfreund27@cdbaby.com',
+  'createdAt': 1580549538207,
+}, {
+  'username': 'mtwaits28',
+  'email': 'ochillcot28@istockphoto.com',
+  'createdAt': 1586624503707,
+}, {
+  'username': 'ccarvil29',
+  'email': 'wbullerwell29@squidoo.com',
+  'createdAt': 1588590015978,
+}, {
+  'username': 'mweeke2a',
+  'email': 'panney2a@cargocollective.com',
+  'createdAt': 1579710242472,
+}, {
+  'username': 'scarrington2b',
+  'email': 'kkrammer2b@examiner.com',
+  'createdAt': 1581027288357,
+}, {
+  'username': 'hpetracchi2c',
+  'email': 'soday2c@aol.com',
+  'createdAt': 1582579488431,
+}, {
+  'username': 'nrisman2d',
+  'email': 'mamoss2d@slideshare.net',
+  'createdAt': 1592664713145,
+}, {
+  'username': 'econyer2e',
+  'email': 'oborel2e@tinypic.com',
+  'createdAt': 1589235012044,
+}, {
+  'username': 'ssmidmore2f',
+  'email': 'nkynder2f@wiley.com',
+  'createdAt': 1593696937855,
+}, {
+  'username': 'barnopp2g',
+  'email': 'rloveman2g@thetimes.co.uk',
+  'createdAt': 1588505890068,
+}, {
+  'username': 'nseccombe2h',
+  'email': 'cskill2h@photobucket.com',
+  'createdAt': 1582475203891,
+}, {
+  'username': 'krosenvasser2i',
+  'email': 'lleopard2i@google.co.uk',
+  'createdAt': 1579073309014,
+}, {
+  'username': 'truston2j',
+  'email': 'tfenning2j@paypal.com',
+  'createdAt': 1593559612735,
+}, {
+  'username': 'choulridge2k',
+  'email': 'nculpan2k@slate.com',
+  'createdAt': 1579944571745,
+}, {
+  'username': 'jleas2l',
+  'email': 'vurion2l@howstuffworks.com',
+  'createdAt': 1591972982406,
+}, {
+  'username': 'gwitard2m',
+  'email': 'rlarchier2m@so-net.ne.jp',
+  'createdAt': 1578269682992,
+}, {
+  'username': 'jburth2n',
+  'email': 'wlaming2n@sfgate.com',
+  'createdAt': 1584837772622,
+}, {
+  'username': 'cnewburn2o',
+  'email': 'fmozzini2o@ebay.co.uk',
+  'createdAt': 1585599204391,
+}, {
+  'username': 'bmaier2p',
+  'email': 'fraffan2p@illinois.edu',
+  'createdAt': 1580176128810,
+}, {
+  'username': 'nkinnaird2q',
+  'email': 'aflukes2q@gov.uk',
+  'createdAt': 1584799671493,
+}, {
+  'username': 'ddibbs2r',
+  'email': 'dphebee2r@flickr.com',
+  'createdAt': 1581092317457,
+}];
+
+export class AddMockUsers1593887121901 implements MigrationInterface {
+  private readonly table = 'users';
+
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    const entities = queryRunner.manager.getRepository(this.table).create(users);
+    await queryRunner.manager.save(entities);
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.manager.getRepository(this.table).delete({ id: LessThan(101) });
+  }
+}
