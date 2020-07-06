@@ -10,7 +10,7 @@ export class AppService {
               private readonly userRepo: Repository<UserEntity>) {}
 
   /*
-  * adding 'post.id' to select occurs 'posts.id column was not found in the UserEntity' exception
+  * adding `post.id` to select occurs 'posts.id column was not found in the UserEntity' exception
   * */
   findRelationSelect(): Promise<UserEntity> {
     return this.userRepo.findOne({
@@ -18,5 +18,16 @@ export class AppService {
       relations: ['posts'],
       select: ['id', 'username'] // ('posts.id' as keyof UserEntity)
     });
+  }
+
+  /*
+  * `select` from relation before `innerJoinAndSelect` will not apply `select` for this join
+  * */
+  getManyWithJoin(): Promise<UserEntity[]> {
+    return this.userRepo.createQueryBuilder('user')
+      // .select(['user.id', 'user.username', 'post.id', 'post.title']) // will not select all from this select array
+      .innerJoinAndSelect('user.posts', 'post')
+      // .select(['user.id', 'user.username', 'post.id', 'post.title']) // will select all from this select array
+      .getMany();
   }
 }

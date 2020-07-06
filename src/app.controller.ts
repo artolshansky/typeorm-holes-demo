@@ -10,4 +10,9 @@ export class AppController {
   findRelationSelect(): Promise<UserEntity> {
     return this.appService.findRelationSelect();
   }
+
+  @Get('/many-with-relations')
+  getManyWithJoin(): Promise<UserEntity[]> {
+    return this.appService.getManyWithJoin();
+  }
 }
