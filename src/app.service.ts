@@ -30,4 +30,15 @@ export class AppService {
       // .select(['user.id', 'user.username', 'post.id', 'post.title']) // will select all from this select array
       .getMany();
   }
+
+  /*
+  * `getOne()` will select all rows and return first
+  * https://github.com/typeorm/typeorm/blob/a595fedc2e159e2eb0c4c5d76bff31ac98da3df2/src/query-builder/SelectQueryBuilder.ts#L1086
+  * */
+  getOne(): Promise<UserEntity> {
+    return this.userRepo.createQueryBuilder('user')
+      .where({ username: 'breckhouse0' })
+      // .limit(1) // need this
+      .getOne();
+  }
 }

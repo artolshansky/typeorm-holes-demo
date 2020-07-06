@@ -15,4 +15,9 @@ export class AppController {
   getManyWithJoin(): Promise<UserEntity[]> {
     return this.appService.getManyWithJoin();
   }
+
+  @Get('/builder-get-one')
+  getOne(): Promise<UserEntity> {
+    return this.appService.getOne();
+  }
 }
