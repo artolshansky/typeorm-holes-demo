@@ -6,8 +6,8 @@ import { UserEntity } from './entities/user.entity';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): Promise<UserEntity> {
-    return this.appService.getHello();
+  @Get('/find-relation-select')
+  findRelationSelect(): Promise<UserEntity> {
+    return this.appService.findRelationSelect();
   }
 }
