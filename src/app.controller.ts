@@ -1,4 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
+import { InsertResult } from 'typeorm/query-builder/result/InsertResult';
+
 import { AppService } from './app.service';
 import { UserEntity } from './entities/user.entity';
 
@@ -19,5 +21,10 @@ export class AppController {
   @Get('/builder-get-one')
   getOne(): Promise<UserEntity> {
     return this.appService.getOne();
+  }
+
+  @Get('/insert')
+  insert(): Promise<InsertResult> {
+    return this.appService.insert();
   }
 }

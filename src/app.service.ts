@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { InsertResult } from 'typeorm/query-builder/result/InsertResult';
 
-import { UserEntity } from './entities/user.entity';
+import { PostEntity, UserEntity } from './entities';
+import { newPosts } from './data';
 
 @Injectable()
 export class AppService {
   constructor(@InjectRepository(UserEntity)
-              private readonly userRepo: Repository<UserEntity>) {}
+              private readonly userRepo: Repository<UserEntity>,
+              @InjectRepository(PostEntity)
+              private readonly postRepo: Repository<PostEntity>) {}
 
   /*
   * adding `post.id` to select occurs 'posts.id column was not found in the UserEntity' exception
@@ -40,5 +44,11 @@ export class AppService {
       .where({ username: 'breckhouse0' })
       // .limit(1) // need this
       .getOne();
+  }
+
+  insert(): Promise<InsertResult> {
+    return this.postRepo
+      .insert(newPosts); // execute one query for all entities
+      // .save(newPosts); // avoid `save` method, it's execute separate query for each entity
   }
 }
