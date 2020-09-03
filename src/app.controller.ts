@@ -3,6 +3,7 @@ import { InsertResult } from 'typeorm/query-builder/result/InsertResult';
 
 import { AppService } from './app.service';
 import { UserEntity } from './entities/user.entity';
+import { PostEntity } from './entities';
 
 @Controller()
 export class AppController {
@@ -24,7 +25,7 @@ export class AppController {
   }
 
   @Get('/insert')
-  insert(): Promise<InsertResult> {
+  insert(): Promise<InsertResult> | Promise<PostEntity[]> {
     return this.appService.insert();
   }
 }

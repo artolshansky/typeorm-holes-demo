@@ -46,7 +46,7 @@ export class AppService {
       .getOne();
   }
 
-  insert(): Promise<InsertResult> {
+  insert(): Promise<InsertResult> | Promise<PostEntity[]> {
     return this.postRepo
       .insert(newPosts); // execute one query for all entities
       // .save(newPosts); // avoid `save` method, it's execute separate query for each entity
